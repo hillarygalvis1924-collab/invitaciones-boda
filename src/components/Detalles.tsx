@@ -74,7 +74,7 @@ export default function Detalles() {
                 <div className="flex flex-col items-center p-6 gap-4">
                   <div className="w-6 h-px bg-dorado/50" aria-hidden="true" />
                   {fecha && (
-                    <p className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-dorado">
+                    <p className="font-sans text-[1.1rem] text-dorado">
                       {fecha}
                     </p>
                   )}
@@ -82,7 +82,7 @@ export default function Detalles() {
                     {lineas.map((linea) => (
                       <li
                         key={linea}
-                        className="font-sans text-[1.44rem] text-carbon/60 leading-relaxed"
+                        className="font-sans text-[1.1rem] text-carbon/60 leading-relaxed"
                       >
                         {linea}
                       </li>
