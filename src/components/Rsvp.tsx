@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import {
   Select,
@@ -15,10 +14,6 @@ import {
 import { AnimateIn } from './AnimateIn'
 import { cn } from '@/lib/utils'
 
-/*
-  Actualizar cuando los horarios de las vans estén confirmados.
-  Corresponden a los horarios en ComoLlegar.tsx.
-*/
 const HORARIOS_VAN = [
   { value: 'van1', label: 'Van 1 — 11:30 a.m.' },
   { value: 'van2', label: 'Van 2 — 12:30 p.m.' },
@@ -27,7 +22,6 @@ const HORARIOS_VAN = [
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 interface FormState {
-  nombre: string
   asistentes: string
   usa_van: 'si' | 'no' | ''
   horario_van: string
@@ -35,29 +29,21 @@ interface FormState {
   mensaje: string
 }
 
-export default function Rsvp() {
+interface Props {
+  groupName: string
+  cupos: number
+}
+
+export default function Rsvp({ groupName, cupos }: Props) {
   const [form, setForm] = useState<FormState>({
-    nombre: '',
     asistentes: '1',
     usa_van: '',
     horario_van: '',
     restricciones: '',
     mensaje: '',
   })
-  const [maxCupos, setMaxCupos] = useState(10)
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
-
-  // Pre-rellenar desde sessionStorage si hay invitado con slug
-  useEffect(() => {
-    const nombre = sessionStorage.getItem('invitado-nombre')
-    const cupos = Number(sessionStorage.getItem('invitado-cupos'))
-    if (nombre) setForm((prev) => ({ ...prev, nombre }))
-    if (cupos > 0) {
-      setMaxCupos(cupos)
-      setForm((prev) => ({ ...prev, asistentes: String(Math.min(cupos, 1)) }))
-    }
-  }, [])
 
   function update(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -65,23 +51,21 @@ export default function Rsvp() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!form.nombre.trim() || !form.usa_van) return
+    if (!form.usa_van) return
 
     setStatus('loading')
     setErrorMsg('')
 
     try {
-      const res = await fetch('/api/rsvp', {
+      const res = await fetch('/api/rsvp-confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          slug: sessionStorage.getItem('invitado-slug') ?? '',
-          nombre: form.nombre.trim(),
           asistentes: Number(form.asistentes),
-          usa_van: form.usa_van === 'si',
+          necesita_van: form.usa_van === 'si',
           horario_van: form.usa_van === 'si' ? form.horario_van : null,
           restricciones: form.restricciones.trim() || null,
-          mensaje: form.mensaje.trim() || null,
+          mensaje_rsvp: form.mensaje.trim() || null,
         }),
       })
 
@@ -98,7 +82,6 @@ export default function Rsvp() {
     <section id="rsvp" className="scroll-mt-16 py-24 bg-oceano-dk">
       <div className="mx-auto max-w-5xl px-5">
 
-        {/* Encabezado */}
         <AnimateIn className="text-center mb-12">
           <p className="font-sans text-[0.6rem] uppercase tracking-[0.25em] text-white/50 mb-4">
             Confirmación de asistencia
@@ -112,7 +95,6 @@ export default function Rsvp() {
         <AnimateIn delay={100} className="mx-auto max-w-lg">
 
           {status === 'success' ? (
-            /* ── Estado de confirmación exitosa ── */
             <div className="bg-hueso p-10 text-center flex flex-col items-center gap-5">
               <CheckCircle size={36} strokeWidth={1.2} className="text-dorado" aria-hidden="true" />
               <div>
@@ -129,28 +111,17 @@ export default function Rsvp() {
               </p>
             </div>
           ) : (
-            /* ── Formulario ── */
             <form
               onSubmit={handleSubmit}
               className="bg-hueso p-8 flex flex-col gap-5"
               noValidate
             >
-              {/* Nombre */}
-              <div className="flex flex-col gap-2">
-                <Label
-                  htmlFor="rsvp-nombre"
-                  className="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-carbon/65"
-                >
-                  Nombre completo *
-                </Label>
-                <Input
-                  id="rsvp-nombre"
-                  value={form.nombre}
-                  onChange={(e) => update('nombre', e.target.value)}
-                  placeholder="Tu nombre o el de tu grupo"
-                  required
-                  className="h-10 text-sm"
-                />
+              {/* Nombre de grupo — solo lectura */}
+              <div className="flex flex-col gap-1 border-b border-arena pb-4">
+                <p className="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-carbon/65">
+                  Confirmando para
+                </p>
+                <p className="font-heading text-xl text-carbon">{groupName}</p>
               </div>
 
               {/* Asistentes */}
@@ -166,7 +137,7 @@ export default function Rsvp() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {Array.from({ length: maxCupos }, (_, i) => String(i + 1)).map((n) => (
+                    {Array.from({ length: cupos }, (_, i) => String(i + 1)).map((n) => (
                       <SelectItem key={n} value={n}>
                         {n} {n === '1' ? 'persona' : 'personas'}
                       </SelectItem>
@@ -175,7 +146,7 @@ export default function Rsvp() {
                 </Select>
               </div>
 
-              {/* Van — toggle binario */}
+              {/* Van */}
               <div className="flex flex-col gap-2">
                 <Label className="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-carbon/65">
                   ¿Necesitas la van desde el aeropuerto? *
@@ -199,7 +170,7 @@ export default function Rsvp() {
                 </div>
               </div>
 
-              {/* Horario van — aparece solo si usa van */}
+              {/* Horario van */}
               {form.usa_van === 'si' && (
                 <div className="flex flex-col gap-2">
                   <Label className="font-sans text-[0.62rem] uppercase tracking-[0.15em] text-carbon/65">
@@ -223,7 +194,7 @@ export default function Rsvp() {
                 </div>
               )}
 
-              {/* Restricciones alimentarias */}
+              {/* Restricciones */}
               <div className="flex flex-col gap-2">
                 <Label
                   htmlFor="rsvp-restricciones"
@@ -261,19 +232,15 @@ export default function Rsvp() {
                 />
               </div>
 
-              {/* Error inline */}
               {status === 'error' && (
                 <p className="font-sans text-xs text-red-600 -mt-1" role="alert">
                   {errorMsg}
                 </p>
               )}
 
-              {/* Submit */}
               <button
                 type="submit"
-                disabled={
-                  status === 'loading' || !form.nombre.trim() || !form.usa_van
-                }
+                disabled={status === 'loading' || !form.usa_van}
                 className="w-full font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white bg-oceano-dk min-h-[44px] flex items-center justify-center transition-colors duration-300 hover:bg-oceano disabled:opacity-40 disabled:cursor-not-allowed mt-2"
               >
                 {status === 'loading' ? 'Enviando…' : 'Confirmar asistencia'}

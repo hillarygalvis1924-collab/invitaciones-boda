@@ -1,3 +1,6 @@
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { createServerClient } from '@/lib/supabase'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Historia from '@/components/Historia'
@@ -9,7 +12,19 @@ import FotoStrip from '@/components/FotoStrip'
 
 const BASE = '/fotos/fotosinvitacion'
 
-export default function Home() {
+export default async function Home() {
+  const token = (await cookies()).get('inv_ok')?.value
+  if (!token) redirect('/no-invitado')
+
+  const supabase = createServerClient()
+  const { data } = await supabase
+    .from('invitations')
+    .select('guest_name, party_size')
+    .eq('token', token)
+    .single()
+
+  if (!data) redirect('/no-invitado')
+
   return (
     <>
       <Navbar />
@@ -40,7 +55,7 @@ export default function Home() {
           `${BASE}/1000184289.jpg`,
         ]} />
 
-        <Rsvp />
+        <Rsvp groupName={data.guest_name} cupos={data.party_size} />
       </main>
 
       <PopupInvitado />
