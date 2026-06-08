@@ -118,6 +118,15 @@ export default function InvitationClient({ token }: Props) {
 
   return (
     <div className={`${styles.wrapper} ${open ? styles.wrapperOpen : ''}`}>
+      <video
+        className={styles.videoBg}
+        src="/video.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      <div className={styles.videoOverlay} />
 
       <div
         className={`${styles.scene} ${open ? styles.sceneOpen : ''}`}
