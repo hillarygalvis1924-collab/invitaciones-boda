@@ -16,7 +16,7 @@ export default function LluviaSobres() {
           />
           <div className="flex flex-col items-center gap-4">
             <div className="w-10 h-px bg-dorado" aria-hidden="true" />
-            <p className="font-heading text-[1.1rem] text-carbon/70 leading-relaxed max-w-md font-normal italic">
+            <p className="font-heading text-[1.5rem] text-carbon/70 leading-relaxed max-w-md font-normal italic">
               Lo más importante para nosotros es compartir este día con ustedes. Sabemos que el
               viaje y su compañía ya representan un regalo enorme. Si además desean hacernos un
               obsequio, hemos elegido la modalidad de lluvia de sobres.
