@@ -1,0 +1,313 @@
+/* ─── Variables del sobre (scoped al wrapper) ─────────────────────────── */
+.wrapper {
+  --bg: #F7F3EA;
+  --paper-light: #EFE4CB;
+  --paper-mid: #E2D4B5;
+  --paper-dark: #CFBD97;
+  --inside: #BBA884;
+  --gold: #A9883F;
+  --gold-soft: #C5A766;
+  --ink: #5C4A30;
+
+  background: radial-gradient(120% 90% at 50% 18%, #FBF8F1 0%, var(--bg) 55%, #EEE6D6 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-cormorant), Georgia, serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: max(170px, calc(50vh - 140px));
+  padding-bottom: 90px;
+  overflow-x: hidden;
+  position: relative;
+  transition: padding-bottom 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+}
+.wrapperOpen { padding-bottom: 480px; }
+
+/* Textura de ruido */
+.wrapper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ─── Hint ────────────────────────────────────────────────────────────── */
+.hint {
+  position: fixed;
+  bottom: 7vh;
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeHint 1s ease 1.2s forwards, breathe 3.4s ease-in-out 2.2s infinite;
+}
+.hintHidden { opacity: 0 !important; animation: none; transition: opacity 0.4s; }
+
+/* ─── Escena ──────────────────────────────────────────────────────────── */
+.scene {
+  position: relative;
+  width: 340px;
+  height: 226px;
+  cursor: pointer;
+  perspective: 1500px;
+  animation: float 5.5s ease-in-out infinite;
+}
+.sceneOpen { animation: none; cursor: default; }
+
+.env {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.sceneOpen .env { transform: translateY(34px) scale(0.96); }
+
+/* Interior del sobre */
+.back {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(160deg, var(--inside), #AC9870);
+  box-shadow: 0 24px 46px -18px rgba(74,55,28,.5), inset 0 0 34px rgba(90,70,40,.3);
+}
+
+/* ─── Fotos polaroid ──────────────────────────────────────────────────── */
+.photos { position: absolute; inset: 0; z-index: 2; }
+
+.photo {
+  position: absolute;
+  left: 50%;
+  top: 90px;
+  width: 152px;
+  height: 172px;
+  margin-left: -76px;
+  background: #fff;
+  padding: 9px 9px 30px;
+  border-radius: 3px;
+  box-shadow: 0 10px 22px -8px rgba(60,45,25,.55);
+  transition: transform 1s cubic-bezier(0.18,0.7,0.25,1), opacity 0.5s ease;
+  transform: translateY(8px) scale(0.9);
+  opacity: 0;
+}
+/* Área visible de la imagen: ~134×133px */
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 7px;
+  text-align: center;
+  font-family: var(--font-parisienne), cursive;
+  font-size: 1rem;
+  color: #8a7350;
+}
+
+.sceneOpen .photo { opacity: 1; }
+.sceneOpen .p1 { transform: translate(-118px,-150px) rotate(-13deg); transition-delay: 0.40s; }
+.sceneOpen .p2 { transform: translate(0,-205px) rotate(2deg) scale(1.04); transition-delay: 0.56s; }
+.sceneOpen .p3 { transform: translate(106px,-140px) rotate(12deg); transition-delay: 0.72s; }
+
+/* ─── Solapas ─────────────────────────────────────────────────────────── */
+.flap { position: absolute; inset: 0; }
+
+.flapLeft {
+  z-index: 4;
+  clip-path: polygon(0 0, 50% 50%, 0 100%);
+  background: linear-gradient(180deg, var(--paper-light), var(--paper-mid));
+}
+.flapRight {
+  z-index: 4;
+  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+  background: linear-gradient(180deg, var(--paper-light), var(--paper-mid));
+}
+.flapBottom {
+  z-index: 6;
+  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+  background: linear-gradient(0deg, var(--paper-mid), var(--paper-dark));
+  transform-origin: bottom center;
+  transform: rotateX(0deg);
+  transition: transform 0.85s cubic-bezier(0.6,0.02,0.3,1), z-index 0s linear 0.3s;
+  filter: drop-shadow(-2px -1px 3px rgba(75,52,25,.22)) drop-shadow(2px -1px 3px rgba(75,52,25,.22));
+}
+.sceneOpen .flapBottom { transform: rotateX(-170deg); z-index: 1; }
+
+.flapTop {
+  z-index: 30;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  background: linear-gradient(180deg, var(--paper-mid), var(--paper-dark));
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 0.85s cubic-bezier(0.6,0.02,0.3,1), z-index 0s linear 0.3s;
+  filter: drop-shadow(-2px 1px 3px rgba(75,52,25,.24)) drop-shadow(2px 1px 3px rgba(75,52,25,.24));
+}
+.sceneOpen .flapTop { transform: rotateX(178deg); z-index: 1; }
+
+/* ─── Nombre del invitado ─────────────────────────────────────────────── */
+.name {
+  position: absolute;
+  left: 0; right: 0; top: 180px;
+  z-index: 8;
+  text-align: center;
+  font-family: var(--font-parisienne), cursive;
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+  transition: opacity 0.4s ease;
+}
+.sceneOpen .name { opacity: 0; }
+.nameSmall {
+  display: block;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+
+/* ─── Carta ───────────────────────────────────────────────────────────── */
+.letter {
+  position: absolute;
+  left: 50%; top: 58px;
+  width: 256px; margin-left: -128px;
+  z-index: 3;
+  background: linear-gradient(160deg, #FBF6EC, #F1E7D3);
+  border: 1px solid rgba(150,120,70,.28);
+  border-radius: 4px;
+  box-shadow: 0 14px 28px -12px rgba(60,45,25,.55);
+  padding: 20px 20px 18px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(0) scale(0.94);
+  transition: transform 1s cubic-bezier(0.18,0.7,0.25,1), opacity 0.5s ease, z-index 0s linear 0.35s;
+}
+.sceneOpen .letter {
+  opacity: 1;
+  transform: translateY(170px) scale(1);
+  z-index: 20;
+  transition-delay: 0.42s, 0.42s, 0s;
+}
+
+.hi { font-family: var(--font-parisienne), cursive; font-size: 1.5rem; color: var(--gold); }
+.rule { width: 42px; height: 1px; background: var(--gold-soft); margin: 9px auto; }
+.msg { font-size: 0.95rem; line-height: 1.5; color: var(--ink); font-style: italic; }
+.sign { margin-top: 12px; font-family: var(--font-parisienne), cursive; font-size: 1.15rem; color: var(--ink); }
+.btn {
+  display: inline-block;
+  margin-top: 18px;
+  text-decoration: none;
+  background: var(--gold);
+  color: #fff;
+  border: 1px solid var(--gold);
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 0.75em 1.9em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn:hover { background: transparent; color: var(--gold); }
+
+/* ─── Lacre ───────────────────────────────────────────────────────────── */
+.seal {
+  position: absolute;
+  left: 50%; top: 81px;
+  width: 64px; height: 64px; margin-left: -32px;
+  z-index: 31;
+  border-radius: 50% 48% 52% 50%;
+  background: radial-gradient(circle at 38% 32%, #D29A63 0%, #B5703C 38%, #8A5226 70%, #6E3D1B 100%);
+  box-shadow: 0 3px 7px rgba(50,28,12,.5), inset 0 2px 4px rgba(255,210,160,.55), inset 0 -5px 9px rgba(70,35,12,.6);
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(-4deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.seal::before {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 48% 52% 50% 50%;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(110,60,25,.35) 75%, transparent 80%);
+}
+.sealSpan {
+  font-family: var(--font-parisienne), cursive;
+  font-size: 1.55rem;
+  color: #5a3417;
+  text-shadow: 0 1px 1px rgba(255,200,150,.4), 0 -1px 1px rgba(40,18,5,.6);
+  transform: rotate(4deg);
+}
+.sceneOpen .seal { transform: translateY(-34px) rotate(-10deg) scale(0.82); opacity: 0; }
+
+/* ─── Reveal (texto que aparece al abrir) ─────────────────────────────── */
+.reveal {
+  position: absolute;
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease 1.15s;
+  pointer-events: none;
+  z-index: 40;
+}
+.sceneOpen .reveal { opacity: 1; }
+.revealScript { font-family: var(--font-parisienne), cursive; font-size: 2.2rem; color: var(--gold); line-height: 1; }
+.revealDate { font-size: 1.05rem; letter-spacing: 0.12em; margin-top: 6px; color: var(--ink); }
+.revealPlace { font-size: 0.7rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+
+/* ─── Estados loading / blocked / invalid ────────────────────────────── */
+.stateScreen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(120% 90% at 50% 18%, #FBF8F1 0%, #F7F3EA 55%, #EEE6D6 100%);
+  padding: 2rem;
+  gap: 1rem;
+  text-align: center;
+}
+.stateMsg {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-style: italic;
+  color: #5C4A30;
+}
+.stateSub {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #5C4A30;
+  opacity: 0.5;
+}
+.loadingDot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #A9883F;
+  animation: breathe 1.6s ease-in-out infinite;
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────────── */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes fadeHint { to { opacity: 0.8; } }
+@keyframes breathe { 0%,100% { opacity: 0.4; } 50% { opacity: 0.85; } }
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 420px) { .scene { transform: scale(0.92); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { animation: none; }
+  .hint { animation: fadeHint 1s ease forwards; }
+  .env, .flapTop, .photo, .seal { transition-duration: 0.45s; }
+}
