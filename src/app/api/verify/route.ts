@@ -18,15 +18,26 @@ export async function POST(req: NextRequest) {
 
   const guest = { name: inv.guest_name, message: inv.mensaje ?? "", cupos: inv.party_size };
 
+  const COOKIE_OPTS = {
+    httpOnly: true,
+    sameSite: 'lax' as const,
+    path: '/',
+    maxAge: 60 * 60 * 24 * 90, // 90 días
+  };
+
   if (!inv.device_id) { // nunca abierta → este dispositivo la reclama
     await supabase.from("invitations").update({
       device_id: deviceId, first_opened_at: new Date().toISOString(), open_count: 1,
     }).eq("id", inv.id);
-    return NextResponse.json({ allowed: true, guest });
+    const res = NextResponse.json({ allowed: true, guest });
+    res.cookies.set('inv_ok', '1', COOKIE_OPTS);
+    return res;
   }
   if (inv.device_id === deviceId) { // mismo dispositivo → permitido
     await supabase.from("invitations").update({ open_count: inv.open_count + 1 }).eq("id", inv.id);
-    return NextResponse.json({ allowed: true, guest });
+    const res = NextResponse.json({ allowed: true, guest });
+    res.cookies.set('inv_ok', '1', COOKIE_OPTS);
+    return res;
   }
   // otro dispositivo → bloqueo suave
   return NextResponse.json({ allowed: false, reason: "other_device", guest: { name: inv.guest_name } });
