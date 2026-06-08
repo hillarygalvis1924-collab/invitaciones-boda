@@ -4,6 +4,7 @@ import { AnimateIn } from './AnimateIn'
 interface Tarjeta {
   img: string
   alt: string
+  fecha?: string
   lineas: string[]
 }
 
@@ -11,6 +12,7 @@ const TARJETAS: Tarjeta[] = [
   {
     img: '/preboda.png',
     alt: 'Preboda',
+    fecha: '29 de Mayo',
     lineas: [
       'Antes de la boda queremos compartir un momento especial con todos ustedes. Será un espacio para descansar, conocernos, disfrutar del lugar y pasar un rato agradable juntos mientras contamos los minutos para el gran momento.',
     ],
@@ -18,6 +20,7 @@ const TARJETAS: Tarjeta[] = [
   {
     img: '/ceremonia.png',
     alt: 'Ceremonia',
+    fecha: '30 de Mayo',
     lineas: [
       'Cada historia de amor tiene momentos que la transforman para siempre. Para nosotros, este será uno de ellos. Con el corazón lleno de emoción, intercambiaremos nuestras promesas y comenzaremos la aventura más hermosa: construir una vida juntos.',
     ],
@@ -25,6 +28,7 @@ const TARJETAS: Tarjeta[] = [
   {
     img: '/recepcion.png',
     alt: 'Recepción',
+    fecha: '30 de Mayo',
     lineas: [
       'Queremos celebrar este día rodeados de las personas que más queremos. Será una noche para reír, bailar, brindar y agradecer por cada abrazo, cada sonrisa y cada recuerdo compartido.',
     ],
@@ -56,7 +60,7 @@ export default function Detalles() {
         </AnimateIn>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {TARJETAS.map(({ img, alt, lineas }, i) => (
+          {TARJETAS.map(({ img, alt, fecha, lineas }, i) => (
             <AnimateIn key={alt} delay={i * 100}>
               <div className="flex flex-col items-center text-center border border-arena bg-hueso/70 h-full overflow-hidden">
                 <Image
@@ -69,11 +73,16 @@ export default function Detalles() {
                 />
                 <div className="flex flex-col items-center p-6 gap-4">
                   <div className="w-6 h-px bg-dorado/50" aria-hidden="true" />
+                  {fecha && (
+                    <p className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-dorado">
+                      {fecha}
+                    </p>
+                  )}
                   <ul className="space-y-2">
                     {lineas.map((linea) => (
                       <li
                         key={linea}
-                        className="font-sans text-[0.72rem] text-carbon/60 leading-relaxed"
+                        className="font-sans text-[1.44rem] text-carbon/60 leading-relaxed"
                       >
                         {linea}
                       </li>
