@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'Nuestra historia', id: 'historia' },
   { label: 'Detalles', id: 'detalles' },
   { label: 'Cómo llegar', id: 'como-llegar' },
-  { label: 'RSVP', id: 'rsvp' },
+  { label: 'Confirmación', id: 'rsvp' },
 ]
 
 function scrollToSection(id: string) {
