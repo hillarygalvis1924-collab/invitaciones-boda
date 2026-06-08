@@ -8,6 +8,7 @@ import Detalles from '@/components/Detalles'
 import ComoLlegar from '@/components/ComoLlegar'
 import Rsvp from '@/components/Rsvp'
 import SinNinos from '@/components/SinNinos'
+import LluviaSobres from '@/components/LluviaSobres'
 import PopupInvitado from '@/components/PopupInvitado'
 import FotoStrip from '@/components/FotoStrip'
 
@@ -48,6 +49,7 @@ export default async function Home() {
         ]} />
 
         <ComoLlegar />
+        <LluviaSobres />
 
         <FotoStrip fotos={[
           `${BASE}/1000184285.jpg`,
