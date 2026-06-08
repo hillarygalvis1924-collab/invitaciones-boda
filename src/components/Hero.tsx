@@ -5,10 +5,6 @@ import Countdown from './Countdown'
 export default function Hero() {
   return (
     <section className="relative min-h-svh flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-oceano-dk via-[#2d4d5c] to-oceano-dk">
-      {/*
-        Foto de fondo — añadir la imagen real en /public/fotos/hero.jpg
-        (retrato o paisaje de los novios en la playa, orientación vertical preferida en móvil)
-      */}
       {/* Foto móvil (9:16) */}
       <Image
         src="/fotos/hero-cel.jpg"
@@ -56,12 +52,12 @@ export default function Hero() {
         <div className="w-8 h-px bg-dorado/60 mt-6 mb-5" aria-hidden="true" />
 
         {/* Lugar */}
-        <p className="font-sans text-[1rem] uppercase tracking-[0.3em] text-white">
+        <p className="font-sans text-[1.1rem] uppercase tracking-[0.3em] text-white">
           Tolú · Sucre · Colombia
         </p>
 
         {/* Fecha */}
-        <p className="font-sans text-[1rem] uppercase tracking-[0.3em] text-white mt-2">
+        <p className="font-sans text-[1.1rem] uppercase tracking-[0.3em] text-white mt-2">
           29 · 30 · 31 de Mayo · 2027
         </p>
 
@@ -71,7 +67,7 @@ export default function Hero() {
         {/* CTA */}
         <a
           href="#rsvp"
-          className="mt-8 font-sans text-[0.65rem] uppercase tracking-[0.2em] text-white/80 border border-white/30 px-7 min-h-[44px] flex items-center hover:border-dorado hover:text-dorado transition-colors duration-300"
+          className="mt-8 font-sans text-[1.1rem] uppercase tracking-[0.2em] text-white/80 border border-white/30 px-7 min-h-[44px] flex items-center hover:border-dorado hover:text-dorado transition-colors duration-300"
         >
           Confirmar asistencia
         </a>

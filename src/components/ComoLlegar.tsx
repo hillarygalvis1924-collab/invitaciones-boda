@@ -39,14 +39,14 @@ export default function ComoLlegar() {
 
         {/* Encabezado */}
         <AnimateIn className="text-center mb-16">
-          <p className="font-sans text-[0.6rem] uppercase tracking-[0.25em] text-dorado mb-4">
+          <p className="font-sans text-[1.1rem] uppercase tracking-[0.25em] text-dorado mb-4">
             Logística
           </p>
           <h2 className="font-heading text-[clamp(2rem,6vw,3.5rem)] text-carbon leading-tight">
             Cómo llegar
           </h2>
           <div className="w-10 h-px bg-dorado mx-auto mt-6" aria-hidden="true" />
-          <p className="font-sans text-xs text-carbon/55 mt-5 max-w-sm mx-auto leading-6">
+          <p className="font-sans text-[1.1rem] text-carbon/55 mt-5 max-w-sm mx-auto leading-6">
             Guarda esta página — la consultarás el día del viaje.
           </p>
         </AnimateIn>
@@ -62,7 +62,7 @@ export default function ComoLlegar() {
               <li className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className="w-8 h-8 rounded-full border border-dorado flex items-center justify-center shrink-0 bg-hueso">
-                    <span className="font-sans text-[0.6rem] text-dorado font-medium">1</span>
+                    <span className="font-sans text-[1.1rem] text-dorado font-medium">1</span>
                   </div>
                   <div className="w-px flex-1 bg-arena min-h-8 my-1" aria-hidden="true" />
                 </div>
@@ -71,7 +71,7 @@ export default function ComoLlegar() {
                     <Plane size={14} strokeWidth={1.4} className="text-dorado shrink-0" aria-hidden="true" />
                     <h3 className="font-heading text-xl text-carbon">Vuelo a Montería</h3>
                   </div>
-                  <div className="font-sans text-xs text-carbon/65 leading-6 space-y-2">
+                  <div className="font-sans text-[1.1rem] text-carbon/65 leading-6 space-y-2">
                     <p>
                       Cada invitado gestiona su propio vuelo. Te recomendamos reservar
                       con anticipación — los vuelos a Montería se llenan rápido.
@@ -101,7 +101,7 @@ export default function ComoLlegar() {
               <li className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className="w-8 h-8 rounded-full border border-dorado flex items-center justify-center shrink-0 bg-hueso">
-                    <span className="font-sans text-[0.6rem] text-dorado font-medium">2</span>
+                    <span className="font-sans text-[1.1rem] text-dorado font-medium">2</span>
                   </div>
                   <div className="w-px flex-1 bg-arena min-h-8 my-1" aria-hidden="true" />
                 </div>
@@ -110,7 +110,7 @@ export default function ComoLlegar() {
                     <BusFront size={14} strokeWidth={1.4} className="text-dorado shrink-0" aria-hidden="true" />
                     <h3 className="font-heading text-xl text-carbon">Van en el aeropuerto</h3>
                   </div>
-                  <div className="font-sans text-xs text-carbon/65 leading-6 space-y-2">
+                  <div className="font-sans text-[1.1rem] text-carbon/65 leading-6 space-y-2">
                     <p>
                       En horarios coordinados habrá vans esperándote en el aeropuerto
                       para llevarlos juntos al venue. ¡Sin estrés de transporte!
@@ -146,7 +146,7 @@ export default function ComoLlegar() {
               <li className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className="w-8 h-8 rounded-full border border-dorado flex items-center justify-center shrink-0 bg-hueso">
-                    <span className="font-sans text-[0.6rem] text-dorado font-medium">3</span>
+                    <span className="font-sans text-[1.1rem] text-dorado font-medium">3</span>
                   </div>
                 </div>
                 <div className="pb-2 flex-1 min-w-0">
@@ -154,7 +154,7 @@ export default function ComoLlegar() {
                     <MapPin size={14} strokeWidth={1.4} className="text-dorado shrink-0" aria-hidden="true" />
                     <h3 className="font-heading text-xl text-carbon">Llegada al venue</h3>
                   </div>
-                  <p className="font-sans text-xs text-carbon/65 leading-6">
+                  <p className="font-sans text-[1.1rem] text-carbon/65 leading-6">
                     Bienvenidos al lugar de la boda. Descansa, disfruta la brisa del
                     mar y prepárate para celebrar.
                   </p>
@@ -164,14 +164,14 @@ export default function ComoLlegar() {
 
             {/* Tips */}
             <div className="mt-2 pt-8 border-t border-arena">
-              <p className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-dorado mb-4">
+              <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-dorado mb-4">
                 Qué llevar
               </p>
               <div className="flex flex-wrap gap-2">
                 {TIPS.map((tip) => (
                   <span
                     key={tip}
-                    className="font-sans text-[0.65rem] text-carbon/60 border border-arena px-3 py-1.5"
+                    className="font-sans text-[1.1rem] text-carbon/60 border border-arena px-3 py-1.5"
                   >
                     {tip}
                   </span>
@@ -184,12 +184,6 @@ export default function ComoLlegar() {
           <AnimateIn delay={200} className="flex flex-col gap-5">
 
             {/* Mapa embebido */}
-            {/*
-              PLACEHOLDER: reemplazar las coordenadas con las del venue real.
-              Para obtener la URL embed correcta:
-              1. Buscar el venue en Google Maps
-              2. Compartir → Incorporar un mapa → copiar el src del iframe
-            */}
             <div className="relative w-full aspect-[4/3] overflow-hidden border border-arena bg-arena/40">
               <iframe
                 title="Ubicación del venue"
@@ -207,7 +201,7 @@ export default function ComoLlegar() {
                 href={VENUE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 font-sans text-[0.65rem] uppercase tracking-[0.18em] text-carbon/80 border border-carbon/20 px-5 min-h-[44px] hover:border-dorado hover:text-dorado transition-colors duration-300 flex-1"
+                className="flex items-center justify-center gap-2 font-sans text-[1.1rem] uppercase tracking-[0.18em] text-carbon/80 border border-carbon/20 px-5 min-h-[44px] hover:border-dorado hover:text-dorado transition-colors duration-300 flex-1"
               >
                 <ExternalLink size={13} strokeWidth={1.5} aria-hidden="true" />
                 Abrir en Google Maps
@@ -216,7 +210,7 @@ export default function ComoLlegar() {
 
             {/* Contacto WhatsApp */}
             <div className="border-l-2 border-dorado/40 pl-4 py-1">
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.15em] text-carbon/55 mb-3">
+              <p className="font-sans text-[1.1rem] uppercase tracking-[0.15em] text-carbon/55 mb-3">
                 ¿Dudas? Escríbenos:
               </p>
               <div className="flex flex-col sm:flex-row gap-2">
@@ -226,7 +220,7 @@ export default function ComoLlegar() {
                     href={`https://wa.me/${phone}?text=${WA_MSG}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 font-sans text-[0.65rem] uppercase tracking-[0.18em] text-white bg-oceano-dk px-5 min-h-[44px] hover:bg-oceano transition-colors duration-300 flex-1"
+                    className="flex items-center justify-center gap-2 font-sans text-[1.1rem] uppercase tracking-[0.18em] text-white bg-oceano-dk px-5 min-h-[44px] hover:bg-oceano transition-colors duration-300 flex-1"
                   >
                     <WhatsAppIcon size={14} />
                     {nombre}

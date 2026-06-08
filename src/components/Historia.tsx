@@ -8,7 +8,7 @@ export default function Historia() {
 
         {/* Encabezado */}
         <AnimateIn className="text-center mb-16">
-          <p className="font-sans text-[0.6rem] uppercase tracking-[0.25em] text-dorado mb-4">
+          <p className="font-sans text-[1.1rem] uppercase tracking-[0.25em] text-dorado mb-4">
             Nuestra historia
           </p>
           <h2 className="font-heading text-[clamp(2rem,6vw,3.5rem)] text-carbon leading-tight">
@@ -22,7 +22,7 @@ export default function Historia() {
 
           {/* Texto */}
           <AnimateIn delay={100} className="order-2 md:order-1">
-            <div className="space-y-5 font-sans text-sm leading-7 text-carbon/70">
+            <div className="space-y-5 font-sans text-[1.1rem] leading-7 text-carbon/70">
               <p>
                 Hace 8 años comenzó nuestra historia, cuando la vida nos unió en un
                 momento en el que aún teníamos muchos sueños por cumplir. Desde entonces
@@ -59,10 +59,6 @@ export default function Historia() {
 
           {/* Fotos */}
           <AnimateIn delay={200} className="order-1 md:order-2">
-            {/*
-              Añadir imágenes en /public/fotos/historia1.jpeg y /public/fotos/historia2.jpeg
-              Formato recomendado: retrato (3:4), mínimo 800 × 1067 px
-            */}
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden bg-arena rounded-sm">
                 <Image
@@ -73,7 +69,6 @@ export default function Historia() {
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
-              {/* Segunda foto desplazada hacia abajo para efecto editorial */}
               <div className="relative aspect-[3/4] overflow-hidden bg-arena/70 rounded-sm mt-8">
                 <Image
                   src="/fotos/historia2.jpeg"

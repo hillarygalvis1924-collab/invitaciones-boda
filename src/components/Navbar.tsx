@@ -67,7 +67,7 @@ export default function Navbar() {
               <button
                 onClick={() => handleLink(id)}
                 className={cn(
-                  'font-sans text-[0.65rem] uppercase tracking-[0.18em] transition-colors duration-300',
+                  'font-sans text-[1.1rem] uppercase tracking-[0.18em] transition-colors duration-300',
                   'min-h-[44px] flex items-center hover:text-dorado',
                   scrolled ? 'text-carbon' : 'text-white/85',
                 )}
@@ -109,7 +109,7 @@ export default function Navbar() {
               <button
                 role="menuitem"
                 onClick={() => handleLink(id)}
-                className="w-full text-left font-sans text-[0.65rem] uppercase tracking-[0.18em] text-carbon hover:text-dorado min-h-[44px] flex items-center transition-colors border-b border-arena/50 last:border-0"
+                className="w-full text-left font-sans text-[1.1rem] uppercase tracking-[0.18em] text-carbon hover:text-dorado min-h-[44px] flex items-center transition-colors border-b border-arena/50 last:border-0"
               >
                 {label}
               </button>

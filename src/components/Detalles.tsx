@@ -50,7 +50,7 @@ export default function Detalles() {
       <div className="mx-auto max-w-5xl px-5">
 
         <AnimateIn className="text-center mb-16">
-          <p className="font-sans text-[0.6rem] uppercase tracking-[0.25em] text-dorado mb-4">
+          <p className="font-sans text-[1.1rem] uppercase tracking-[0.25em] text-dorado mb-4">
             Detalles
           </p>
           <h2 className="font-heading text-[clamp(2rem,6vw,3.5rem)] text-carbon leading-tight">
@@ -95,7 +95,7 @@ export default function Detalles() {
         </div>
 
         <AnimateIn delay={400} className="text-center mt-10">
-          <p className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-carbon/35">
+          <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-carbon/35">
             Estamos en la playa — lino, colores suaves y zapatos cómodos serán tus mejores aliados
           </p>
         </AnimateIn>

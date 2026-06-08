@@ -16,7 +16,7 @@ export default function SinNinos() {
           />
           <div className="flex flex-col items-center gap-4">
             <div className="w-10 h-px bg-dorado" aria-hidden="true" />
-            <p className="font-heading text-[1rem] text-carbon/70 leading-relaxed max-w-md font-normal">
+            <p className="font-heading text-[1.1rem] text-carbon/70 leading-relaxed max-w-md font-normal">
               Aunque les tenemos mucho cariño a los niños, hemos decidido que esta celebración sea
               únicamente para adultos. Gracias por comprender y por acompañarnos en este día tan especial.
             </p>
