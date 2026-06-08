@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost, Great_Vibes, Euphoria_Script, Parisienne } from "next/font/google";
 import "./globals.css";
+import AudioProvider from "@/components/AudioProvider";
+import MusicButton from "@/components/MusicButton";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -66,7 +68,10 @@ export default function RootLayout({
       className={`${cormorant.variable} ${jost.variable} ${greatVibes.variable} ${euphoriaScript.variable} ${parisienne.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-hueso text-carbon">
-        {children}
+        <AudioProvider>
+          {children}
+          <MusicButton />
+        </AudioProvider>
       </body>
     </html>
   );

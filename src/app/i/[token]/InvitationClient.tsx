@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './InvitationClient.module.css'
+import { useAudio } from '@/components/AudioProvider'
 
 type Status = 'loading' | 'ok' | 'blocked' | 'invalid'
 
@@ -33,6 +34,7 @@ export default function InvitationClient({ token }: Props) {
   const [guest, setGuest]             = useState<GuestData | null>(null)
   const [blockedName, setBlockedName] = useState('')
   const [open, setOpen]               = useState(false)
+  const { play }                      = useAudio()
 
   /* ── Device binding ─────────────────────────────────────────────────── */
   useEffect(() => {
@@ -63,8 +65,11 @@ export default function InvitationClient({ token }: Props) {
   }, [token])
 
   const handleOpen = useCallback(() => {
-    if (!open) setOpen(true)
-  }, [open])
+    if (!open) {
+      setOpen(true)
+      play()
+    }
+  }, [open, play])
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
