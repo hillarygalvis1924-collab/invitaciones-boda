@@ -1,44 +1,39 @@
-import { Sun, Heart, Music, Sparkles } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import { AnimateIn } from './AnimateIn'
 
 interface Tarjeta {
-  Icono: LucideIcon
-  titulo: string
+  img: string
+  alt: string
   lineas: string[]
 }
 
 const TARJETAS: Tarjeta[] = [
   {
-    Icono: Sun,
-    titulo: 'Preboda',
+    img: '/preboda.png',
+    alt: 'Preboda',
     lineas: [
-      'Viernes 29 de mayo de 2027',
-      'Lago en el cielo',
+      'Antes de la boda queremos compartir un momento especial con todos ustedes. Será un espacio para descansar, conocernos, disfrutar del lugar y pasar un rato agradable juntos mientras contamos los minutos para el gran momento.',
     ],
   },
   {
-    Icono: Heart,
-    titulo: 'Ceremonia',
+    img: '/ceremonia.png',
+    alt: 'Ceremonia',
     lineas: [
-      'Sábado 30 de mayo de 2027',
-      'Lago en el cielo',
+      'Cada historia de amor tiene momentos que la transforman para siempre. Para nosotros, este será uno de ellos. Con el corazón lleno de emoción, intercambiaremos nuestras promesas y comenzaremos la aventura más hermosa: construir una vida juntos.',
     ],
   },
   {
-    Icono: Music,
-    titulo: 'Recepción',
+    img: '/recepcion.png',
+    alt: 'Recepción',
     lineas: [
-      'Sábado 30 de mayo de 2027',
-      'Lago en el cielo',
-      'Cena · música · baile',
+      'Queremos celebrar este día rodeados de las personas que más queremos. Será una noche para reír, bailar, brindar y agradecer por cada abrazo, cada sonrisa y cada recuerdo compartido.',
     ],
   },
   {
-    Icono: Sparkles,
-    titulo: 'Dress code',
+    img: '/dresscode.png',
+    alt: 'Dress code',
     lineas: [
-      '🌊✨ Tonos delicados para un día inolvidable.',
+      'Tonos delicados para un día inolvidable.',
       'Los invitamos a vestir colores suaves inspirados en el mar y el atardecer.',
       'Blanco, beige y arena reservados para los novios.',
     ],
@@ -50,7 +45,6 @@ export default function Detalles() {
     <section id="detalles" className="scroll-mt-16 py-24 bg-arena/25">
       <div className="mx-auto max-w-5xl px-5">
 
-        {/* Encabezado */}
         <AnimateIn className="text-center mb-16">
           <p className="font-sans text-[0.6rem] uppercase tracking-[0.25em] text-dorado mb-4">
             Detalles
@@ -61,30 +55,37 @@ export default function Detalles() {
           <div className="w-10 h-px bg-dorado mx-auto mt-6" aria-hidden="true" />
         </AnimateIn>
 
-        {/* Tarjetas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {TARJETAS.map(({ Icono, titulo, lineas }, i) => (
-            <AnimateIn key={titulo} delay={i * 100}>
-              <div className="flex flex-col items-center text-center p-8 border border-arena bg-hueso/70 h-full">
-                <Icono size={20} strokeWidth={1.3} className="text-dorado mb-5" aria-hidden="true" />
-                <h3 className="font-heading text-[1.6rem] text-carbon">{titulo}</h3>
-                <div className="w-6 h-px bg-dorado/50 my-4" aria-hidden="true" />
-                <ul className="space-y-2">
-                  {lineas.map((linea) => (
-                    <li
-                      key={linea}
-                      className="font-sans text-[0.72rem] text-carbon/60 leading-relaxed"
-                    >
-                      {linea}
-                    </li>
-                  ))}
-                </ul>
+          {TARJETAS.map(({ img, alt, lineas }, i) => (
+            <AnimateIn key={alt} delay={i * 100}>
+              <div className="flex flex-col items-center text-center border border-arena bg-hueso/70 h-full overflow-hidden">
+                <div className="relative w-full h-44">
+                  <Image
+                    src={img}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  />
+                </div>
+                <div className="flex flex-col items-center p-6 gap-4">
+                  <div className="w-6 h-px bg-dorado/50" aria-hidden="true" />
+                  <ul className="space-y-2">
+                    {lineas.map((linea) => (
+                      <li
+                        key={linea}
+                        className="font-sans text-[0.72rem] text-carbon/60 leading-relaxed"
+                      >
+                        {linea}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </AnimateIn>
           ))}
         </div>
 
-        {/* Nota dress code */}
         <AnimateIn delay={400} className="text-center mt-10">
           <p className="font-sans text-[0.6rem] uppercase tracking-[0.2em] text-carbon/35">
             Estamos en la playa — lino, colores suaves y zapatos cómodos serán tus mejores aliados
