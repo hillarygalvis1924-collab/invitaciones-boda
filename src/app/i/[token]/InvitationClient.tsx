@@ -23,9 +23,9 @@ const DEFAULT_MSG =
 /* Fotos polaroid — colocar en /public/invitacion/
    Área visible: ~134×133 px. Proporción libre, se recorta centrado. */
 const PHOTOS: { src: string; cap: string; cls: 'p1' | 'p2' | 'p3' }[] = [
-  { src: '/invitacion/foto-1.jpg', cap: 'tú y yo',     cls: 'p1' },
-  { src: '/invitacion/foto-2.jpg', cap: 'por siempre', cls: 'p2' },
-  { src: '/invitacion/foto-3.jpg', cap: 'la playa',    cls: 'p3' },
+  { src: '/invitacion/Foto-1.jpg', cap: 'tú y yo',     cls: 'p1' },
+  { src: '/invitacion/Foto-2.jpg', cap: 'por siempre', cls: 'p2' },
+  { src: '/invitacion/Foto-3.jpg', cap: 'la playa',    cls: 'p3' },
 ]
 
 export default function InvitationClient({ token }: Props) {
