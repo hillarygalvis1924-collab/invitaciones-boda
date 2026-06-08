@@ -125,6 +125,7 @@ export default function InvitationClient({ token }: Props) {
         muted
         loop
         playsInline
+        preload="auto"
       />
       <div className={styles.videoOverlay} />
 
