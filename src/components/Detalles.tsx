@@ -94,19 +94,20 @@ export default function Detalles() {
           ))}
         </div>
 
-        <AnimateIn delay={400} className="mt-12">
-          <div className="border-t border-arena pt-10 text-center">
-            <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-dorado mb-6">
+        <AnimateIn delay={400} className="mt-12 flex justify-center">
+          <div className="border border-arena bg-hueso/70 px-10 py-8 max-w-sm w-full">
+            <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-dorado mb-5">
               Recomendaciones para la playa
             </p>
-            <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-x-10 gap-y-3">
+            <ul className="space-y-3">
               {[
                 'La ceremonia será sobre arena.',
                 'Se recomienda calzado cómodo.',
                 'Protector solar y gafas de sol son bienvenidos.',
                 'Habrá espacios de sombra y descanso.',
               ].map((item) => (
-                <li key={item} className="font-sans text-[1.1rem] text-carbon/60">
+                <li key={item} className="flex items-start gap-3 font-sans text-[1.1rem] text-carbon/60">
+                  <span className="text-dorado/70 mt-0.5 shrink-0">·</span>
                   {item}
                 </li>
               ))}
