@@ -7,6 +7,7 @@ import Historia from '@/components/Historia'
 import Detalles from '@/components/Detalles'
 import ComoLlegar from '@/components/ComoLlegar'
 import Rsvp from '@/components/Rsvp'
+import SinNinos from '@/components/SinNinos'
 import PopupInvitado from '@/components/PopupInvitado'
 import FotoStrip from '@/components/FotoStrip'
 
@@ -55,6 +56,7 @@ export default async function Home() {
           `${BASE}/1000184289.jpg`,
         ]} />
 
+        <SinNinos />
         <Rsvp groupName={data.guest_name} cupos={data.party_size} />
       </main>
 
