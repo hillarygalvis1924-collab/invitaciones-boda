@@ -59,15 +59,14 @@ export default function Detalles() {
           {TARJETAS.map(({ img, alt, lineas }, i) => (
             <AnimateIn key={alt} delay={i * 100}>
               <div className="flex flex-col items-center text-center border border-arena bg-hueso/70 h-full overflow-hidden">
-                <div className="relative w-full h-44">
-                  <Image
-                    src={img}
-                    alt={alt}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  />
-                </div>
+                <Image
+                  src={img}
+                  alt={alt}
+                  width={0}
+                  height={0}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="w-full h-auto"
+                />
                 <div className="flex flex-col items-center p-6 gap-4">
                   <div className="w-6 h-px bg-dorado/50" aria-hidden="true" />
                   <ul className="space-y-2">
