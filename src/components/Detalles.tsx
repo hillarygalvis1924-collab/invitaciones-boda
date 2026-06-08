@@ -94,10 +94,24 @@ export default function Detalles() {
           ))}
         </div>
 
-        <AnimateIn delay={400} className="text-center mt-10">
-          <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-carbon/35">
-            Estamos en la playa — lino, colores suaves y zapatos cómodos serán tus mejores aliados
-          </p>
+        <AnimateIn delay={400} className="mt-12">
+          <div className="border-t border-arena pt-10 text-center">
+            <p className="font-sans text-[1.1rem] uppercase tracking-[0.2em] text-dorado mb-6">
+              Recomendaciones para la playa
+            </p>
+            <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-x-10 gap-y-3">
+              {[
+                'La ceremonia será sobre arena.',
+                'Se recomienda calzado cómodo.',
+                'Protector solar y gafas de sol son bienvenidos.',
+                'Habrá espacios de sombra y descanso.',
+              ].map((item) => (
+                <li key={item} className="font-sans text-[1.1rem] text-carbon/60">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </AnimateIn>
       </div>
     </section>
