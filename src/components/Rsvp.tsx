@@ -226,7 +226,7 @@ export default function Rsvp({ groupName, cupos }: Props) {
                   id="rsvp-mensaje"
                   value={form.mensaje}
                   onChange={(e) => update('mensaje', e.target.value)}
-                  placeholder="Cuéntanos algo bonito…"
+                  placeholder="Si quieres dejarnos unas palabras personales, escríbelas."
                   rows={3}
                   className="text-[1.1rem] resize-none"
                 />

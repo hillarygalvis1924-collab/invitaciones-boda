@@ -152,7 +152,7 @@ export default function ComoLlegar() {
                 <div className="pb-2 flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin size={14} strokeWidth={1.4} className="text-dorado shrink-0" aria-hidden="true" />
-                    <h3 className="font-heading text-xl text-carbon">Llegada al venue</h3>
+                    <h3 className="font-heading text-xl text-carbon">Llegada a las villas</h3>
                   </div>
                   <p className="font-sans text-[1.1rem] text-carbon/65 leading-6">
                     Bienvenidos al lugar de la boda. Descansa, disfruta la brisa del
