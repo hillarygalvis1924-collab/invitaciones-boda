@@ -149,7 +149,7 @@ export default function InvitationClient({ token }: Props) {
 
           {/* Carta con mensaje personalizado */}
           <div className={styles.letter}>
-            <div className={styles.hi}>Querido {g.name}</div>
+            <div className={styles.hi}>{g.name}</div>
             <div className={styles.rule} />
             <div className={styles.msg}>{msg}</div>
             <div className={styles.sign}>Juan Pablo &amp; Hillary</div>
