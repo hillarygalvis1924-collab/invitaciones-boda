@@ -10,6 +10,7 @@ import Rsvp from '@/components/Rsvp'
 import SinNinos from '@/components/SinNinos'
 import LluviaSobres from '@/components/LluviaSobres'
 import PopupInvitado from '@/components/PopupInvitado'
+import DiscrecionModal from '@/components/DiscrecionModal'
 import FotoStrip from '@/components/FotoStrip'
 
 const BASE = '/fotos/fotosinvitacion'
@@ -63,6 +64,7 @@ export default async function Home() {
       </main>
 
       <PopupInvitado />
+      <DiscrecionModal />
 
       <footer className="py-10 px-5 bg-carbon text-center">
         <p className="font-heading text-lg text-white/40 tracking-widest">H &amp; J · 2027</p>
