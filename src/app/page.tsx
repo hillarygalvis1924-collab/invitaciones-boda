@@ -64,7 +64,7 @@ export default async function Home() {
       </main>
 
       <PopupInvitado />
-      <DiscrecionModal />
+      <DiscrecionModal cupos={data.party_size} />
 
       <footer className="py-10 px-5 bg-carbon text-center">
         <p className="font-heading text-lg text-white/40 tracking-widest">H &amp; J · 2027</p>

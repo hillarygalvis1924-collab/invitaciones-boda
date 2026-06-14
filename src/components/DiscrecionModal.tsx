@@ -3,15 +3,15 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { Heart } from 'lucide-react'
 
-const STORAGE_KEY = 'discrecion_vista'
+interface Props {
+  cupos: number
+}
 
-export default function DiscrecionModal() {
+export default function DiscrecionModal({ cupos }: Props) {
   const [visible, setVisible] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    // Quita el if para que salga siempre:
-    if (localStorage.getItem(STORAGE_KEY)) return
     setVisible(true)
   }, [])
 
@@ -28,7 +28,6 @@ export default function DiscrecionModal() {
   }, [visible])
 
   const close = useCallback(() => {
-    localStorage.setItem(STORAGE_KEY, '1')
     setVisible(false)
   }, [])
 
@@ -41,6 +40,8 @@ export default function DiscrecionModal() {
   }, [visible, close])
 
   if (!visible) return null
+
+  const personasTexto = cupos === 1 ? '1 persona' : `${cupos} personas`
 
   return (
     // Sin aria-hidden en el overlay — lo heredaría el dialog y lo ocultaría de lectores
@@ -84,6 +85,18 @@ export default function DiscrecionModal() {
           comentarla con otras personas. Gracias por comprenderlo y por ser parte de
           este día.
         </p>
+
+        <div className="w-full bg-dorado/10 border border-dorado/30 rounded-sm px-5 py-4">
+          <p className="font-sans text-[0.72rem] uppercase tracking-[0.2em] text-dorado mb-1">
+            Cupos de esta invitación
+          </p>
+          <p className="font-heading text-xl text-carbon">
+            Válida para {personasTexto}
+          </p>
+          <p className="font-sans text-[0.78rem] text-carbon/55 mt-1 leading-snug">
+            Por favor limítate a este número al confirmar tu asistencia.
+          </p>
+        </div>
 
         {/* Botón */}
         <button
